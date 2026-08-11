@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMS Consent - SafeRides</title>
+<meta name="description" content="How SafeRides collects SMS consent during signup, what messages we send, and how to opt out.">
+<style>
+  :root { --royal: #1740A6; }
+  /* Fonts are declared with system fallbacks and no external request, matching
+     how privacy.html and terms.html handle fonts. Nothing on this page loads
+     from a third-party origin: no webfonts, no scripts, no analytics. */
+  body {
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6; color: var(--royal); margin: 0; background: #fff;
+  }
+  h1, h2, h3 {
+    font-family: Archivo, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--royal);
+  }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; box-sizing: border-box; }
+  .back { margin-bottom: 1.75rem; }
+  .back a, a { color: var(--royal); }
+  h1 { font-size: 1.75rem; margin: 0 0 0.25rem; }
+  .sub { font-size: 1rem; margin: 0 0 2rem; opacity: 0.75; }
+  h2 { font-size: 1.25rem; margin: 2.25rem 0 0.75rem; }
+  p { margin: 0 0 0.85rem; }
+  ul { margin: 0 0 0.85rem; padding-left: 1.25rem; }
+  li { margin-bottom: 0.35rem; }
+  .banner {
+    background: rgba(23, 64, 166, 0.08);
+    border: 1px solid var(--royal);
+    border-radius: 8px; padding: 0.9rem 1rem; margin: 0 0 1rem;
+    font-size: 0.95rem;
+  }
+  .demo {
+    border: 1px solid var(--royal); border-radius: 10px;
+    padding: 1.25rem; margin: 0 0 1rem;
+  }
+  .demo h3 { font-size: 1.15rem; margin: 0 0 0.15rem; }
+  .step { font-size: 0.9rem; opacity: 0.75; margin: 0 0 1.1rem; }
+  .field { margin-bottom: 0.9rem; }
+  .field label { display: block; font-size: 0.85rem; margin-bottom: 0.3rem; }
+  .field input[type="text"], .field input[type="tel"] {
+    width: 100%; box-sizing: border-box; padding: 0.65rem 0.75rem;
+    border: 1px solid var(--royal); border-radius: 8px;
+    font: inherit; color: var(--royal); background: #fff;
+  }
+  .consent { display: flex; gap: 0.7rem; align-items: flex-start; margin: 1rem 0; }
+  .consent input[type="checkbox"] {
+    margin-top: 0.25rem; width: 20px; height: 20px; flex: 0 0 20px; accent-color: var(--royal);
+  }
+  .consent label { font-size: 0.85rem; line-height: 1.5; }
+  .continue {
+    background: var(--royal); color: #fff; border: 0; border-radius: 8px;
+    padding: 0.75rem 1.5rem; font: inherit; font-weight: 600; cursor: pointer;
+    width: 100%;
+  }
+  .result {
+    margin-top: 1rem; padding: 0.9rem 1rem;
+    border: 1px solid var(--royal); border-radius: 8px;
+    background: rgba(23, 64, 166, 0.05); font-size: 0.95rem;
+  }
+  .disclosure {
+    border: 1px solid var(--royal); border-left-width: 5px; border-radius: 8px;
+    background: rgba(23, 64, 166, 0.05);
+    padding: 1rem 1.15rem; margin: 0 0 0.85rem; font-size: 0.95rem;
+  }
+  figure { margin: 0; }
+  figure img {
+    width: 100%; max-width: 720px; height: auto; display: block;
+    border: 1px solid var(--royal); border-radius: 10px;
+  }
+  figcaption { font-size: 0.9rem; margin-top: 0.6rem; opacity: 0.85; }
+  footer { margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid var(--royal); font-size: 0.9rem; }
+  footer a { margin-right: 1.25rem; }
+  .updated { margin-top: 0.75rem; opacity: 0.75; }
+  @media (min-width: 640px) {
+    .continue { width: auto; }
+    .wrap { padding: 2rem 2rem 4rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="back"><a href="/">Back to SafeRides</a></nav>
+
+<header>
+  <h1>SMS Consent</h1>
+  <p class="sub">SafeRides, operated by Coetzee Tech Inc</p>
+</header>
+
+<section>
+  <h2>How users consent</h2>
+  <p>
+    SafeRides collects SMS consent during account signup, inside the SafeRides rider
+    app and the SafeRides Driver app. The interactive demonstration below reproduces
+    the consent screen exactly as it appears to users, at Step 3 of 6 of signup. The
+    screen is identical in both apps.
+  </p>
+  <p>
+    The checkbox is unchecked by default. The user must actively check it to consent.
+    Account verification is performed by email, not by text message. SafeRides does
+    not purchase, rent, or acquire phone numbers from data brokers or any third-party
+    list vendor.
+  </p>
+</section>
+
+<section>
+  <h2>Interactive demonstration</h2>
+  <div class="banner">
+    Demonstration only. This form reproduces the SafeRides signup consent step. No
+    data is collected, submitted, or stored, and no messages are sent.
+  </div>
+
+  <div class="demo">
+    <h3>Your identity</h3>
+    <p class="step">Step 3 of 6</p>
+
+    <div class="field">
+      <label for="demo-name">Full Name</label>
+      <input type="text" id="demo-name" name="demo-name" autocomplete="off">
+    </div>
+
+    <div class="field">
+      <label for="demo-phone">Phone Number</label>
+      <input type="tel" id="demo-phone" name="demo-phone" autocomplete="off">
+    </div>
+
+    <div class="consent">
+      <input type="checkbox" id="demo-consent">
+      <label for="demo-consent">
+        By entering your phone number and checking this box, you agree to receive SMS
+        text messages from SafeRides, operated by Coetzee Tech Inc, including: account
+        verification codes, ride status and driver dispatch alerts, and live trip
+        tracking links. Message frequency varies. Message and data rates may apply.
+        Reply STOP to opt out. Reply HELP for help. Consent is not a condition of
+        purchase or of using SafeRides. See our
+        <a href="https://saferidesapp.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+        and
+        <a href="https://saferidesapp.com/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a>.
+      </label>
+    </div>
+
+    <button type="button" class="continue" id="demo-continue">Continue</button>
+    <div class="result" id="demo-result" hidden></div>
+  </div>
+</section>
+
+<section>
+  <h2>Disclosure text shown next to the checkbox</h2>
+  <p class="disclosure">
+    By entering your phone number and checking this box, you agree to receive SMS
+    text messages from SafeRides, operated by Coetzee Tech Inc, including: account
+    verification codes, ride status and driver dispatch alerts, and live trip
+    tracking links. Message frequency varies. Message and data rates may apply.
+    Reply STOP to opt out. Reply HELP for help. Consent is not a condition of
+    purchase or of using SafeRides. See our Privacy Policy and Terms of Service.
+  </p>
+</section>
+
+<section>
+  <h2>Screenshot from the live app</h2>
+  <figure>
+    <img src="/images/sms-consent-signup.png" alt="SafeRides signup consent screen, Step 3 of 6, showing the unchecked SMS consent checkbox and its disclosure text">
+    <figcaption>
+      SafeRides signup, Step 3 of 6. The consent screen is identical in the SafeRides
+      rider app and the SafeRides Driver app.
+    </figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2>What we send</h2>
+  <p>
+    Account verification codes. Ride status and driver dispatch alerts. Live trip
+    tracking links.
+  </p>
+  <p>Message frequency varies. Message and data rates may apply.</p>
+</section>
+
+<section>
+  <h2>Opt out and help</h2>
+  <p>
+    Reply STOP to opt out. You will receive one confirmation message and no further
+    messages.
+  </p>
+  <p>Reply HELP for help, or contact <a href="mailto:saferideshelp@gmail.com">saferideshelp@gmail.com</a>.</p>
+  <p>Additional opt-out keywords: STOPALL, UNSUBSCRIBE, CANCEL, END, QUIT.</p>
+  <p>Additional help keyword: INFO.</p>
+</section>
+
+<footer>
+  <a href="https://saferidesapp.com/privacy">Privacy Policy</a>
+  <a href="https://saferidesapp.com/terms">Terms of Service</a>
+  <p class="updated">Last updated: August 11, 2026</p>
+</footer>
+
+</div>
+
+<script>
+  // Local only. No fetch, no XHR, no form submission, no cookies, no localStorage
+  // or sessionStorage. Continue is deliberately ungated: it works whether the box
+  // is checked or not, mirroring the SafeRides apps, where consent is optional and
+  // signup completes either way.
+  (function () {
+    var box = document.getElementById('demo-consent');
+    var button = document.getElementById('demo-continue');
+    var result = document.getElementById('demo-result');
+    button.addEventListener('click', function () {
+      result.hidden = false;
+      result.textContent = box.checked
+        ? 'In the SafeRides app, signup continues and this user is recorded as having consented to SMS messages.'
+        : 'In the SafeRides app, signup continues exactly the same way. This user is recorded as having declined, receives no text messages, and loses no functionality. Account verification is completed by email.';
+    });
+  })();
+</script>
+</body>
+</html>

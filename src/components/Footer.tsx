@@ -143,6 +143,17 @@ export default function Footer() {
             >
               Terms
             </Link>
+            {/* A plain anchor, not a react-router Link, on purpose: /sms-consent
+                is a standalone static file in public/, the same as privacy.html
+                and terms.html. A Link would client-side route to the dead React
+                page instead of loading the real one. */}
+            <a
+              href="/sms-consent"
+              className="font-body text-white/50 hover:text-white/80 transition-colors"
+              style={{ fontSize: "0.8rem" }}
+            >
+              SMS Consent
+            </a>
             <button
               type="button"
               onClick={() => {
