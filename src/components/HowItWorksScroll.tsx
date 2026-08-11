@@ -192,9 +192,7 @@ function RiderPhone({ idx }: { idx: number }) {
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 12, border: "1.5px solid #1740A6", borderRadius: 14, padding: "10px 12px", background: "#F6F9FF" }}>
-                <div style={{ width: 60, height: 38, borderRadius: 8, background: "repeating-linear-gradient(135deg,#DFE7F7 0 5px,#F1F5FD 5px 10px)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: MONO_STACK, fontSize: 8, letterSpacing: ".08em", color: "#8595BA" }}>
-                  SEDAN
-                </div>
+                <img src="/images/ride_types/safe.png" alt="" style={{ width: 60, height: 38, borderRadius: 8, objectFit: "contain", display: "block" }} />
                 <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 2 }}>
                   <div style={{ fontSize: 14, fontWeight: 600, color: "#1740A6" }}>SafeRide</div>
                   <div style={{ fontSize: 11, color: "#7C8DB5" }}>Best value</div>
@@ -202,9 +200,7 @@ function RiderPhone({ idx }: { idx: number }) {
                 <div style={{ fontSize: 15, fontWeight: 700, color: "#1740A6" }}>$8.50</div>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: 12, border: "1px solid #E4EAF7", borderRadius: 14, padding: "10px 12px" }}>
-                <div style={{ width: 60, height: 38, borderRadius: 8, background: "repeating-linear-gradient(135deg,#DFE7F7 0 5px,#F1F5FD 5px 10px)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: MONO_STACK, fontSize: 8, letterSpacing: ".08em", color: "#8595BA" }}>
-                  SUV
-                </div>
+                <img src="/images/ride_types/xl.png" alt="" style={{ width: 60, height: 38, borderRadius: 8, objectFit: "contain", display: "block" }} />
                 <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 2 }}>
                   <div style={{ fontSize: 14, fontWeight: 600, color: "#1740A6" }}>SafeRide XL</div>
                   <div style={{ fontSize: 11, color: "#7C8DB5" }}>For groups of 5 or more</div>
@@ -219,9 +215,7 @@ function RiderPhone({ idx }: { idx: number }) {
           <div style={{ ...sheet, padding: "18px 18px 22px", gap: 14 }}>
             <div style={{ width: 38, height: 4, borderRadius: 4, background: "#DCE3F4", margin: "0 auto" }} />
             <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-              <div style={{ width: 74, height: 48, borderRadius: 10, background: "repeating-linear-gradient(135deg,#DFE7F7 0 5px,#F1F5FD 5px 10px)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: MONO_STACK, fontSize: 8, letterSpacing: ".08em", color: "#8595BA" }}>
-                SEDAN
-              </div>
+              <img src="/images/ride_types/safe.png" alt="" style={{ width: 74, height: 48, borderRadius: 10, objectFit: "contain", display: "block" }} />
               <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 3 }}>
                 <div style={{ fontFamily: ARCHIVO, fontSize: 18, fontWeight: 600, color: "#1740A6" }}>SafeRide</div>
                 <div style={{ fontSize: 11, color: "#7C8DB5" }}>Arrives in 4 min</div>
@@ -445,7 +439,7 @@ function DriverPhone({
             <div style={{ height: 1, background: "#EDF1FA" }} />
             <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
               <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase", color: "#8595BA" }}>
-                {"RIDER'S CODE"}
+                {"Type in riders code"}
               </div>
               <div style={{ display: "flex", gap: 8 }}>
                 {["4", "8", "2"].map((d) => (
