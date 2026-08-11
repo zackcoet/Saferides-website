@@ -68,7 +68,14 @@ function StepList({ header, steps }: { header: string; steps: typeof RIDER_STEPS
   );
 }
 
-export default function HowItWorks() {
+export default function HowItWorks({
+  onSeeHowItWorks,
+  revealed = false,
+}: {
+  /** Reveals the scroll walkthrough, which stays hidden until asked for. */
+  onSeeHowItWorks?: () => void;
+  revealed?: boolean;
+}) {
   return (
     <section id="how-it-works" className="bg-white py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
@@ -82,6 +89,19 @@ export default function HowItWorks() {
         <div className="mt-12 grid gap-12 md:grid-cols-2 md:gap-16">
           <StepList header="As a rider" steps={RIDER_STEPS} />
           <StepList header="As a driver" steps={DRIVER_STEPS} />
+        </div>
+
+        <div className="mt-14">
+          <button
+            type="button"
+            onClick={onSeeHowItWorks}
+            aria-expanded={revealed}
+            aria-controls="see-how-it-works"
+            className="inline-flex items-center gap-2 rounded-xl bg-[#1740A6] px-7 py-4 font-display font-semibold text-white transition-opacity hover:opacity-90 cursor-pointer"
+            style={{ fontSize: "0.95rem" }}
+          >
+            {revealed ? "Hide the walkthrough" : "See how it works"}
+          </button>
         </div>
       </div>
     </section>

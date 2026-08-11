@@ -73,6 +73,14 @@
   }
 }
 
+/* Searching pulse for the How SafeRides Works walkthrough. Ported from the
+   design export, which declared it in its own head style block. */
+@keyframes srPulse {
+  0% { transform: scale(1); opacity: .45; }
+  70% { transform: scale(2.6); opacity: 0; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
 @layer components {
   /* Signature pickup-code motif */
   .code-chip {
