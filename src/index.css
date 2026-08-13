@@ -81,6 +81,15 @@
   100% { transform: scale(2.6); opacity: 0; }
 }
 
+/* The rush demo's own pulse. Kept separate from srPulse above because the two
+   design exports specify different scales, and the walkthrough's must not
+   change to match. */
+@keyframes srPulseRush {
+  0% { transform: scale(1); opacity: .45; }
+  70% { transform: scale(2.4); opacity: 0; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
 @layer components {
   /* Signature pickup-code motif */
   .code-chip {
