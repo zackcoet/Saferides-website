@@ -14,6 +14,7 @@ const Businesses = lazy(() => import("./pages/Businesses"));
 const DriversPage = lazy(() => import("./pages/DriversPage"));
 const SmsConsent = lazy(() => import("./pages/SmsConsent"));
 const RushPage = lazy(() => import("./pages/RushPage"));
+const Download = lazy(() => import("./pages/Download"));
 
 export default function App() {
   return (
@@ -29,6 +30,9 @@ export default function App() {
           <Route path="/drivers" element={<DriversPage />} />
           <Route path="/sms-consent" element={<SmsConsent />} />
           <Route path="/rush" element={<RushPage />} />
+          <Route path="/download" element={<Download />} />
+          {/* Alias so a mistyped flyer/bio link still lands. */}
+          <Route path="/downloads" element={<Download />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
