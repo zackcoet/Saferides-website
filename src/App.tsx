@@ -1,5 +1,7 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import usePageViews from "./hooks/usePageViews";
 import Index from "./pages/Index";
 import StoryPage from "./pages/StoryPage";
 import NotFound from "./pages/NotFound";
@@ -16,9 +18,19 @@ const SmsConsent = lazy(() => import("./pages/SmsConsent"));
 const RushPage = lazy(() => import("./pages/RushPage"));
 const Download = lazy(() => import("./pages/Download"));
 
+/**
+ * Lives inside BrowserRouter because usePageViews needs the router context.
+ * Renders nothing.
+ */
+function RouteAnalytics() {
+  usePageViews();
+  return null;
+}
+
 export default function App() {
   return (
     <BrowserRouter>
+      <RouteAnalytics />
       <Suspense fallback={<div className="min-h-screen bg-white" />}>
         <Routes>
           <Route path="/" element={<Index />} />
