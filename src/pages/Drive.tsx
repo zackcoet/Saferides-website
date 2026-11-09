@@ -89,6 +89,7 @@ export default function Drive() {
       <Nav />
       <main>
         <Section
+          first
           eyebrow="Drive for SafeRides"
           title="Get paid to drive students. Your hours."
           line="Guaranteed hourly pay Thursday, Friday and Saturday nights. Keep every tip."

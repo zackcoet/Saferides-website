@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-import GetTheApp from "@/components/site/GetTheApp";
+import QrCode from "@/components/site/QrCode";
+import { DOWNLOAD_URL } from "@/components/site/GetTheApp";
+import { trackEvent } from "@/lib/analytics";
 
 /**
  * The first three seconds.
@@ -37,7 +39,9 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.05 }}
               className="mt-5 font-display font-black text-[#1740A6]"
-              style={{ fontSize: "clamp(2.75rem, 6vw, 4.75rem)", lineHeight: 1.02 }}
+              // 2.25rem at the small end, not 2.75: at 375px the larger size ran the
+              // headline to five lines and pushed the buttons off the first screen.
+              style={{ fontSize: "clamp(2.25rem, 6vw, 4.75rem)", lineHeight: 1.04 }}
             >
               Safe rides for USC students.
               <br />
@@ -60,14 +64,27 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.22 }}
               className="mt-8 flex flex-col items-center gap-5 md:items-start"
             >
-              <div className="flex flex-wrap items-center justify-center gap-4 md:justify-start">
-                <GetTheApp surface="hero" />
-                <Link
-                  to="/parents"
-                  className="rounded-[10px] border border-[#1740A6] bg-white px-7 py-3.5 font-body font-semibold text-[#1740A6]"
-                >
-                  For parents
-                </Link>
+              {/* The two buttons stay together and the QR sits beside the
+                  pair — bundling GetTheApp here put the code BETWEEN them. */}
+              <div className="flex flex-wrap items-center justify-center gap-5 md:justify-start">
+                <div className="flex flex-wrap items-center gap-4">
+                  <a
+                    href={DOWNLOAD_URL}
+                    onClick={() => trackEvent("app_store_click", { surface: "hero" })}
+                    className="rounded-[10px] bg-[#1740A6] px-7 py-3.5 font-body font-semibold text-white"
+                  >
+                    Get the app
+                  </a>
+                  <Link
+                    to="/parents"
+                    className="rounded-[10px] border border-[#1740A6] bg-white px-7 py-3.5 font-body font-semibold text-[#1740A6]"
+                  >
+                    For parents
+                  </Link>
+                </div>
+                <div className="hidden md:block">
+                  <QrCode value={DOWNLOAD_URL} surface="hero" label="Scan to download" />
+                </div>
               </div>
             </motion.div>
           </div>
@@ -86,8 +103,9 @@ export default function Hero() {
               alt="The SafeRides app home screen, showing a map of Columbia with Five Points, The Vista and Williams-Brice marked"
               className="w-[220px] sm:w-[260px] md:w-[300px] rounded-[2rem] border border-[#1740A6]/10"
               // Above the fold on every screen, so it is the one image that
-              // must not lazy-load.
-              fetchPriority="high"
+              // must not lazy-load. Spread lowercase: React 18 does not know
+              // the camelCase prop and passes it through with a warning.
+              {...{ fetchpriority: "high" }}
             />
           </motion.div>
         </div>

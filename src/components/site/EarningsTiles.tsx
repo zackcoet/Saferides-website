@@ -68,7 +68,9 @@ export default function EarningsTiles() {
 
   return (
     <div>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {/* Three across, not four: there are five tiles, and 4+1 strands the
+          last one alone on its own row. */}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {saturday?.hourlyUsd != null && (
           <Tile
             big={`$${saturday.hourlyUsd}/hr`}

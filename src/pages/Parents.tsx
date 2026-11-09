@@ -84,6 +84,7 @@ export default function Parents() {
       <Nav />
       <main>
         <Section
+          first
           eyebrow="For parents"
           title="Nobody should walk home at 1am."
           line="SafeRides is a rideshare app only USC students can use, driven by USC students."

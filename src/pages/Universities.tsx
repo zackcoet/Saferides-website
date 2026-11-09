@@ -47,6 +47,7 @@ export default function Universities() {
       <Nav />
       <main>
         <Section
+          first
           eyebrow="For universities"
           title="A late-night safety net you don't have to run."
           line="SafeRides is a student-only rideshare already operating at USC. No campus budget, no vehicles, no staffing."

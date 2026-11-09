@@ -14,6 +14,7 @@ export default function Section({
   children,
   cta,
   variant = "light",
+  first = false,
   className = "",
 }: {
   id?: string;
@@ -24,13 +25,17 @@ export default function Section({
   /** The section's single button. */
   cta?: ReactNode;
   variant?: "light" | "onBlue";
+  /** First section on a page: clears the 64px fixed nav. */
+  first?: boolean;
   className?: string;
 }) {
   const onBlue = variant === "onBlue";
   return (
     <section
       id={id}
-      className={`${onBlue ? "bg-[#1740A6]" : "bg-white"} py-16 sm:py-24 ${className}`}
+      className={`${onBlue ? "bg-[#1740A6]" : "bg-white"} ${
+        first ? "pt-28 pb-16 sm:pt-36 sm:pb-24" : "py-16 sm:py-24"
+      } ${className}`}
     >
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         {eyebrow && (
