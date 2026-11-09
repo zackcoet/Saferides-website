@@ -1,15 +1,22 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+import { DOWNLOAD_URL } from "@/components/site/GetTheApp";
+import { trackEvent } from "@/lib/analytics";
+
+/**
+ * Real routes, not homepage anchors. The old list pointed at #for-businesses
+ * and #drivers, which were ids that no longer exist on any page — every one
+ * of those links was a no-op from anywhere but the homepage.
+ */
 const NAV_LINKS = [
-  { label: "Safety", href: "#safety" },
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "For Businesses", href: "#for-businesses" },
-  { label: "Drivers", href: "#drivers" },
+  { label: "For parents", to: "/parents" },
+  { label: "For universities", to: "/universities" },
+  { label: "Drive for us", to: "/drive" },
+  { label: "For businesses", to: "/businesses" },
 ];
 
 const CONTACT_EMAIL = "saferideshelp@gmail.com";
-const APP_STORE_URL = "https://apps.apple.com/app/id6750380495";
 const INPUT_CLASS =
   "w-full rounded-[8px] border border-white/25 bg-white px-4 py-3 font-body text-[#1740A6] placeholder:text-[#1740A6]/55 outline-none focus:border-white";
 
@@ -25,13 +32,6 @@ export default function Footer() {
     accountType: "rider",
     details: "",
   });
-
-  const scrollTo = (href: string) => {
-    if (href.startsWith("#")) {
-      const el = document.getElementById(href.slice(1));
-      if (el) el.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   const update = (
     key: keyof typeof form,
@@ -102,13 +102,13 @@ export default function Footer() {
         {/* Nav */}
         <div className="flex flex-col gap-3">
           {NAV_LINKS.map((l) => (
-            <button
-              key={l.href}
-              onClick={() => scrollTo(l.href)}
-              className="text-left font-body font-medium text-white/65 hover:text-white transition-colors bg-transparent border-none cursor-pointer"
+            <Link
+              key={l.to}
+              to={l.to}
+              className="font-body font-medium text-white/65 hover:text-white transition-colors w-fit"
             >
               {l.label}
-            </button>
+            </Link>
           ))}
           <Link
             to="/apply"
@@ -121,12 +121,11 @@ export default function Footer() {
         {/* App + legal */}
         <div className="flex flex-col items-start gap-4 sm:items-end">
           <a
-            href={APP_STORE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={DOWNLOAD_URL}
+            onClick={() => trackEvent("app_store_click", { surface: "footer" })}
             className="rounded-[8px] bg-white px-6 py-3 font-display font-bold text-[#1740A6]"
           >
-            Download the app
+            Get the app
           </a>
           <div className="flex flex-col gap-2 sm:items-end">
             <Link

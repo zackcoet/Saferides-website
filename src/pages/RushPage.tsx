@@ -6,7 +6,10 @@ import RushDemoScroll from "@/components/RushDemoScroll";
 import RushFaq from "@/components/RushFaq";
 import Footer from "@/components/Footer";
 
-const APP_STORE_URL = "https://apps.apple.com/app/id6750380495";
+// Through /download like every other download link on the site, so a rush
+// flyer and a homepage tap are counted the same way.
+import { DOWNLOAD_URL } from "@/components/site/GetTheApp";
+import { trackEvent } from "@/lib/analytics";
 
 /* ---------------------------------------------------------------------- */
 /* Icons — simple line-art SVGs, no emojis, royal-blue only.               */
@@ -91,7 +94,8 @@ export default function RushPage() {
                 toward your chapter's total.
               </p>
               <a
-                href={APP_STORE_URL}
+                href={DOWNLOAD_URL}
+                onClick={() => trackEvent("app_store_click", { surface: "rush" })}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-9 inline-block rounded-[10px] bg-white px-7 py-3.5 font-display font-bold text-[#1740A6]"
