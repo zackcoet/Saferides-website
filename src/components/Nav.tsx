@@ -1,16 +1,23 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
+import { DOWNLOAD_URL } from "@/components/site/GetTheApp";
+import { trackEvent } from "@/lib/analytics";
+
 type NavLinkItem = { label: string; hash?: string; to?: string };
 
+/**
+ * One entry per audience, in the order they matter to us: the two groups we
+ * are actually writing for, then the job, then businesses. "Safety" and "How
+ * It Works" came out — they were homepage anchors that meant nothing to
+ * somebody arriving on /parents, and the parents page covers both properly.
+ */
 const NAV_LINKS: NavLinkItem[] = [
-  { label: "Safety", hash: "safety" },
-  { label: "How It Works", hash: "how-it-works" },
-  { label: "For Businesses", to: "/businesses" },
-  { label: "Drivers", to: "/drivers" },
+  { label: "Parents", to: "/parents" },
+  { label: "Universities", to: "/universities" },
+  { label: "Drive", to: "/drive" },
+  { label: "Businesses", to: "/businesses" },
 ];
-
-const APP_STORE_URL = "https://apps.apple.com/app/id6750380495";
 
 function MenuIcon() {
   return (
@@ -92,10 +99,10 @@ export default function Nav() {
           )}
         </nav>
 
+        {/* No QR here: the bar is 64px tall and there is one in the hero. */}
         <a
-          href={APP_STORE_URL}
-          target="_blank"
-          rel="noopener noreferrer"
+          href={DOWNLOAD_URL}
+          onClick={() => trackEvent("app_store_click", { surface: "nav" })}
           className="hidden md:inline-flex rounded-[8px] bg-[#1740A6] px-5 py-2 font-body font-semibold text-white"
         >
           Get the app
@@ -154,10 +161,11 @@ export default function Nav() {
 
           <div className="px-6 pb-10">
             <a
-              href={APP_STORE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setOpen(false)}
+              href={DOWNLOAD_URL}
+              onClick={() => {
+                trackEvent("app_store_click", { surface: "nav_mobile" });
+                setOpen(false);
+              }}
               className="block w-full rounded-[8px] bg-[#1740A6] px-5 py-4 text-center font-body font-semibold text-white"
             >
               Get the app
