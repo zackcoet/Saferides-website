@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import usePageViews from "./hooks/usePageViews";
 import Index from "./pages/Index";
@@ -13,12 +13,12 @@ const Privacy = lazy(() => import("./pages/Privacy"));
 const Terms = lazy(() => import("./pages/Terms"));
 const Apply = lazy(() => import("./pages/Apply"));
 const Businesses = lazy(() => import("./pages/Businesses"));
-const DriversPage = lazy(() => import("./pages/DriversPage"));
 const SmsConsent = lazy(() => import("./pages/SmsConsent"));
 const RushPage = lazy(() => import("./pages/RushPage"));
 const Download = lazy(() => import("./pages/Download"));
 const Parents = lazy(() => import("./pages/Parents"));
 const Universities = lazy(() => import("./pages/Universities"));
+const Drive = lazy(() => import("./pages/Drive"));
 
 /**
  * Lives inside BrowserRouter because usePageViews needs the router context.
@@ -41,7 +41,11 @@ export default function App() {
           <Route path="/story" element={<StoryPage />} />
           <Route path="/apply" element={<Apply />} />
           <Route path="/businesses" element={<Businesses />} />
-          <Route path="/drivers" element={<DriversPage />} />
+          <Route path="/drive" element={<Drive />} />
+          {/* The old driver page. Flyers and old links still point here, so it
+              redirects rather than 404s — and it is a real redirect, not a
+              second copy of the page that would drift from /drive. */}
+          <Route path="/drivers" element={<Navigate to="/drive" replace />} />
           <Route path="/sms-consent" element={<SmsConsent />} />
           <Route path="/rush" element={<RushPage />} />
           <Route path="/parents" element={<Parents />} />
