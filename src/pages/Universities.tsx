@@ -4,6 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import BookACallForm from "@/components/site/BookACallForm";
 import Counter from "@/components/site/Counter";
+import PhotoSlot from "@/components/site/PhotoSlot";
 import Section from "@/components/site/Section";
 import { BAKED_STATS, LAUNCH_DATE_ISO } from "@/config/siteStats";
 
@@ -74,6 +75,11 @@ export default function Universities() {
         </section>
 
         <Section eyebrow="What we offer" title="Three things a campus can use.">
+          <PhotoSlot
+            shot="The SafeRides team on the USC Horseshoe, daylight, faces visible."
+            aspect="16 / 7"
+            className="mb-8"
+          />
           <div className="grid gap-4 sm:grid-cols-3">
             {OFFER.map(({ icon: Icon, title, line }) => (
               <div

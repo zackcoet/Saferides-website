@@ -4,6 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import EarningsTiles from "@/components/site/EarningsTiles";
 import Section from "@/components/site/Section";
+import PhotoSlot from "@/components/site/PhotoSlot";
 import Steps from "@/components/site/Steps";
 import { APP_LINKS, isLive } from "@/config/appLinks";
 import { trackEvent } from "@/lib/analytics";
@@ -104,6 +105,11 @@ export default function Drive() {
         </Section>
 
         <Section eyebrow="Why students drive" title="It fits around class.">
+          <PhotoSlot
+            shot="A real SafeRides driver in their own car at night, campus behind them."
+            aspect="16 / 7"
+            className="mb-8"
+          />
           <div className="grid gap-4 sm:grid-cols-3">
             {WHY.map(({ icon: Icon, title, line }) => (
               <div

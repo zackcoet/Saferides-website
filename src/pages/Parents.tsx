@@ -6,6 +6,7 @@ import Counter from "@/components/site/Counter";
 import GetTheApp, { DOWNLOAD_URL } from "@/components/site/GetTheApp";
 import SafetyTiles from "@/components/site/SafetyTiles";
 import Section from "@/components/site/Section";
+import PhotoSlot from "@/components/site/PhotoSlot";
 import Steps from "@/components/site/Steps";
 import { TYPICAL_FARE } from "@/config/siteStats";
 import { trackEvent } from "@/lib/analytics";
@@ -110,6 +111,11 @@ export default function Parents() {
         </Section>
 
         <Section eyebrow="How it works" title="Three steps.">
+          <PhotoSlot
+            shot="A group of students getting into a SafeRides car in Five Points at night."
+            aspect="16 / 7"
+            className="mb-10"
+          />
           <Steps steps={STEPS} />
         </Section>
 
