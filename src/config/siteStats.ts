@@ -69,3 +69,24 @@ export function formatCount(n: number): string {
 
 /** Below this the counter is hidden entirely rather than shown small. */
 export const MIN_COUNT_TO_SHOW = 1;
+
+/**
+ * What a ride really costs, read from the same 2026-11-09 production pass
+ * over completed rides since launch (n=399 fares, n=411 per-person figures,
+ * excludedUids removed).
+ *
+ *   fares        p25 $6.75   median $9.00   p75 $11.04
+ *   per person   p25 $3.38   median $4.13   p75 $5.50
+ *
+ * The page quotes the MIDDLE HALF, not the median alone — a single number
+ * reads as a price list, and the fare varies with distance, group size and
+ * the zone and priority multipliers. Rounded outward to whole dollars so the
+ * range can only be wider than the truth, never narrower.
+ */
+export const TYPICAL_FARE = {
+  lowUsd: 7,
+  highUsd: 11,
+  perPersonUsd: 4,
+  source:
+    "production rides, completed, since launch, read 2026-11-09 — finalPrice p25/p75 and pricePerPerson median",
+};

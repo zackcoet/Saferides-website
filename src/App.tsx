@@ -17,6 +17,7 @@ const DriversPage = lazy(() => import("./pages/DriversPage"));
 const SmsConsent = lazy(() => import("./pages/SmsConsent"));
 const RushPage = lazy(() => import("./pages/RushPage"));
 const Download = lazy(() => import("./pages/Download"));
+const Parents = lazy(() => import("./pages/Parents"));
 
 /**
  * Lives inside BrowserRouter because usePageViews needs the router context.
@@ -42,6 +43,7 @@ export default function App() {
           <Route path="/drivers" element={<DriversPage />} />
           <Route path="/sms-consent" element={<SmsConsent />} />
           <Route path="/rush" element={<RushPage />} />
+          <Route path="/parents" element={<Parents />} />
           <Route path="/download" element={<Download />} />
           {/* Alias so a mistyped flyer/bio link still lands. */}
           <Route path="/downloads" element={<Download />} />
