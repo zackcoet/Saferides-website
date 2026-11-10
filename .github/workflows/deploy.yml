@@ -48,9 +48,15 @@ jobs:
           VITE_FIREBASE_PROJECT_ID: saferides-73eb2
           VITE_FIREBASE_STORAGE_BUCKET: saferides-73eb2.firebasestorage.app
           VITE_GA4_ID: G-JWRK6S6N6T
-          # Not set yet — the public totals endpoint does not exist. Unset
-          # simply means the counter keeps the numbers baked into the build.
-          VITE_STATS_ENDPOINT: ${{ vars.VITE_STATS_ENDPOINT }}
+          # The public totals endpoint. Literal, not a repo variable: it is a
+          # public unauthenticated URL that ships in the bundle regardless, and
+          # one less piece of out-of-band setup to forget. It serves one
+          # document of four totals and no per-person data.
+          #
+          # If it is ever unreachable the counter simply keeps the numbers
+          # baked into the build, so a bad value here degrades to today's
+          # behaviour rather than an empty page.
+          VITE_STATS_ENDPOINT: https://us-central1-saferides-73eb2.cloudfunctions.net/publicStats
 
       - name: SPA fallback - copy index.html to 404.html
         run: cp dist/index.html dist/404.html
