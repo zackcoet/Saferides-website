@@ -32,29 +32,25 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Vite inlines VITE_* at build time, so they must exist HERE — a value
-      # set anywhere else never reaches the bundle. VITE_GA4_ID is a repository
-      # *variable* (a GA4 measurement ID is public and appears in the page);
-      # the Firebase values are secrets.
+      # Vite inlines VITE_* at build time, so every value the bundle needs has
+      # to be in THIS env block — one block, because a second `env:` key on the
+      # same step is a duplicate YAML key and silently throws one of them away.
       #
-      # Any of these left unset simply turns that feature off: no GA4 tag, and
-      # the Firebase-backed forms fall back to their error path.
+      # All of these are public. The Firebase web client config ships in the
+      # client bundle no matter what, and a GA4 measurement ID appears in the
+      # page source; security is enforced by Storage/Firestore rules, not by
+      # hiding these. Real secrets never go in here.
       - name: Build
         run: npm run build
-        env:
-          VITE_GA4_ID: ${{ vars.VITE_GA4_ID }}
-          VITE_STATS_ENDPOINT: ${{ vars.VITE_STATS_ENDPOINT }}
-          VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
-          VITE_FIREBASE_AUTH_DOMAIN: ${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}
-          VITE_FIREBASE_PROJECT_ID: ${{ secrets.VITE_FIREBASE_PROJECT_ID }}
-          VITE_FIREBASE_STORAGE_BUCKET: ${{ secrets.VITE_FIREBASE_STORAGE_BUCKET }}
-        # Firebase web client config is public (it ships in the client bundle);
-        # security is enforced by Storage/Firestore rules, not by hiding these.
         env:
           VITE_FIREBASE_API_KEY: AIzaSyBwLL99C2wpc7wzj6ANTt2UW6LUNr3Yhp4
           VITE_FIREBASE_AUTH_DOMAIN: saferides-73eb2.firebaseapp.com
           VITE_FIREBASE_PROJECT_ID: saferides-73eb2
           VITE_FIREBASE_STORAGE_BUCKET: saferides-73eb2.firebasestorage.app
+          VITE_GA4_ID: G-JWRK6S6N6T
+          # Not set yet — the public totals endpoint does not exist. Unset
+          # simply means the counter keeps the numbers baked into the build.
+          VITE_STATS_ENDPOINT: ${{ vars.VITE_STATS_ENDPOINT }}
 
       - name: SPA fallback - copy index.html to 404.html
         run: cp dist/index.html dist/404.html
