@@ -1,5 +1,5 @@
 /**
- * siteStats — the "students home safe" counter.
+ * siteStats — the homepage counter.
  *
  * TWO SOURCES, IN THIS ORDER:
  *   1. The live endpoint (VITE_STATS_ENDPOINT). Public, cached, totals only.
@@ -26,6 +26,14 @@ export const LAUNCH_DATE_ISO = "2026-08-18";
 export const PERIOD_LABEL = "this semester";
 
 export type SiteStats = {
+  /** Ride requests since launch, whatever came of them. The headline number. */
+  rideRequests: number;
+  /**
+   * Sum of `numberOfPeople` over ALL requests since launch — seats asked
+   * for, not distinct people and not people carried. Only 476 unique
+   * students are behind it, and only 876 of these seats travelled.
+   */
+  studentsRequested: number;
   /** Sum of `numberOfPeople` over completed rides since launch. */
   studentsHomeSafe: number;
   /** Completed rides since launch. */
@@ -35,30 +43,43 @@ export type SiteStats = {
 };
 
 /**
- * Baked at build time. Counted 2026-11-09 by the read-only reader against
- * production `rides`:
+ * Baked at build time. Counted 2026-11-10 by the read-only reader against
+ * production `rides`, createdAt >= 2026-08-18 00:00 ET, minus every ride
+ * whose rider OR driver uid is in growthControl/state.excludedUids (31
+ * accounts, including the founder's internal 6922 phone cluster) and minus
+ * the sim_* generated accounts. 91 docs excluded as test, 27 dropped as
+ * pre-launch or undated, 1,432 counted.
  *
- *   status == 'completed', completedAt (or createdAt) >= 2026-08-18 ET,
- *   summing numberOfPeople with a missing value counted as 1, minus every
- *   ride whose rider OR driver uid is in growthControl/state.excludedUids
- *   (31 accounts, including the founder's internal 6922 phone cluster — 17
- *   rides, 41 people), minus riders on a test.saferides email, minus the
- *   sim_* generated accounts, minus 11 pre-launch rides.
+ * WHAT EACH NUMBER COUNTS, because the difference matters and has been got
+ * wrong once already:
  *
- *   412 rides / 927 people survive the excludedUids list alone; the stricter
- *   test-account and test-driver filters bring it to the figures below. The
- *   SMALLER number is the one we print.
+ *   rideRequests     every request a real student submitted. 1,064 of them
+ *                    were cancelled, overwhelmingly because no driver was
+ *                    online to take them. This is DEMAND, not deliveries.
+ *   studentsRequested sum of numberOfPeople over ALL requests. Seats asked
+ *                    for. The same student appears once per request, so it
+ *                    is NOT a headcount — 476 distinct students are behind
+ *                    the 3,167.
+ *   ridesCompleted   requests that ended in status 'completed'.
+ *   studentsHomeSafe sum of numberOfPeople over those completed rides only,
+ *                    a missing value counted as 1. A cancelled request got
+ *                    nobody home, so it can never feed this number.
+ *
+ * A request that never found a driver must NEVER be described as a trip, a
+ * ride given, or a student got home. 3,167 students appear across all
+ * requests; only 876 of them actually travelled.
+ *
+ * HOW TO REFRESH: run docs/readMarketingNumbers.js and paste the totals in
+ * with the date. Nothing else in the site holds a copy.
  */
 export const BAKED_STATS: SiteStats = {
+  rideRequests: 1432,
+  studentsRequested: 3167,
   studentsHomeSafe: 876,
   ridesCompleted: 388,
-  countedAtIso: "2026-11-09",
+  countedAtIso: "2026-11-10",
 };
 
-/**
- * Live totals endpoint. Absent in dev and until the Backend ships it, which
- * is the normal case — the hook simply keeps the baked numbers.
- */
 export const STATS_ENDPOINT: string | undefined =
   import.meta.env.VITE_STATS_ENDPOINT || undefined;
 

@@ -27,10 +27,20 @@ export default function useSiteStats(): SiteStats {
       .then((r) => (r.ok ? r.json() : null))
       .then((data: Partial<SiteStats> | null) => {
         if (cancelled || !data) return;
+        const requests = Number(data.rideRequests);
+        const seats = Number(data.studentsRequested);
         const people = Number(data.studentsHomeSafe);
         const rides = Number(data.ridesCompleted);
         if (!Number.isFinite(people) || !Number.isFinite(rides)) return;
         setStats((current) => ({
+          // A live figure is taken only when it is bigger. An endpoint that
+          // omits rideRequests leaves the baked one standing untouched.
+          rideRequests: Number.isFinite(requests)
+            ? Math.max(current.rideRequests, requests)
+            : current.rideRequests,
+          studentsRequested: Number.isFinite(seats)
+            ? Math.max(current.studentsRequested, seats)
+            : current.studentsRequested,
           studentsHomeSafe: Math.max(current.studentsHomeSafe, people),
           ridesCompleted: Math.max(current.ridesCompleted, rides),
           countedAtIso: data.countedAtIso ?? current.countedAtIso,

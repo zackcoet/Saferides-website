@@ -45,6 +45,8 @@ An `onRequest` function, public, no auth, **totals only**:
 
 ```json
 {
+  "rideRequests": 1432,
+  "studentsRequested": 3167,
   "studentsHomeSafe": 876,
   "ridesCompleted": 388,
   "countedAtIso": "2026-11-09"
@@ -57,7 +59,17 @@ somebody infer our demand curve stays out — this is served to anyone who asks.
 
 ### How the numbers are defined
 
-Over `rides` where `status == 'completed'`:
+Over `rides`, **all statuses**, for the two figures the site now shows:
+
+- **`rideRequests`** — the number of requests. Every status counts, including
+  cancelled; a request that never found a driver is still demand.
+- **`studentsRequested`** — the sum of `numberOfPeople` over all of them. This
+  is seats asked for, NOT a headcount: the same student appears once per
+  request (1,432 requests came from 476 distinct students). Never label it as
+  students carried or students who have used SafeRides.
+
+Over `rides` where `status == 'completed'`, for the two the site keeps in
+reserve:
 
 - **`studentsHomeSafe`** — the sum of `numberOfPeople`. A missing, non-numeric
   or sub-1 value counts as **1**, never 0.
