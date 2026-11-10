@@ -21,7 +21,7 @@ export default function Hero() {
   return (
     <section className="relative bg-white pt-28 pb-16 sm:pt-32 sm:pb-20">
       <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
-        <div className="grid items-center gap-12 md:grid-cols-[1.1fr_0.9fr]">
+        <div className="grid items-center gap-12 md:grid-cols-[1.3fr_0.7fr]">
           {/* Words */}
           <div className="text-center md:text-left">
             <motion.p
@@ -39,9 +39,12 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.05 }}
               className="mt-5 font-display font-black text-[#1740A6]"
-              // 2.25rem at the small end, not 2.75: at 375px the larger size ran the
-              // headline to five lines and pushed the buttons off the first screen.
-              style={{ fontSize: "clamp(2.25rem, 6vw, 4.75rem)", lineHeight: 1.04 }}
+              // Both ends are set by how the line BREAKS, not by taste. 2.25rem
+              // at the small end: 2.75 ran to five lines at 375px and pushed
+              // the buttons off the first screen. 3.5rem at the large end:
+              // 4.75 overflowed the text column at 1440 and left "USC"
+              // stranded on a line of its own.
+              style={{ fontSize: "clamp(2.25rem, 4.4vw, 3.5rem)", lineHeight: 1.05 }}
             >
               Safe rides for USC students.
               <br />
